@@ -8,7 +8,7 @@ const CharacterContext = createContext();
 export const CharacterProvider = ({ children }) => {
   const [characters, setCharacters] = useState([]);
   const [selectedApi, setSelectedApi] = useState('futurama');
-  // const [selectedTheme, setSelectedTheme] = useState('light');
+  const [selectedTheme, setSelectedTheme] = useState('light');
 
   const apiMap = {
     futurama: fetchFuturamaCharacters,
@@ -22,7 +22,7 @@ export const CharacterProvider = ({ children }) => {
 
 
   return (
-    <CharacterContext.Provider value={{ characters, setSelectedApi, apiMap }}>
+    <CharacterContext.Provider value={{ characters, setSelectedApi, apiMap, selectedTheme, setSelectedTheme }}>
       {children}
     </CharacterContext.Provider>
   );
@@ -30,7 +30,6 @@ export const CharacterProvider = ({ children }) => {
 
 export const useCharacters = () => {
   const { characters } = useContext(CharacterContext);
-  console.log('beans', characters);
   return characters;
 };
 
@@ -43,6 +42,16 @@ export const useSetSelectedApi = () => {
 export const useSelectedApi = () => {
   const { selectedApi } = useContext(CharacterContext);
   return selectedApi;
+};
+
+export const useSetSelectedTheme = () => {
+  const { setSelectedTheme } = useContext(CharacterContext);
+  return setSelectedTheme;
+};
+
+export const useSelectedTheme = () => {
+  const { selectedTheme } = useContext(CharacterContext);
+  return selectedTheme;
 };
 
 
